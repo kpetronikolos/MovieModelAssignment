@@ -14,7 +14,27 @@ namespace MovieAssignment
 
             List<Movie> Movies = new List<Movie>();
 
-            var review = new Dictionary<int, string>() { { 10, "Perfect" }, { 6, "Good" }, { 9, "Very Good" } };
+            try
+            {
+                var review = new Dictionary<int, string>() { { 10, "Perfect" }, { 6, "Good" }, { 9, "Very Good" } };
+
+                foreach (var key in review.Keys)
+                {
+                    if (key > 10 || key < 1)
+                    {
+                        throw new SystemException();
+                    }
+                }
+
+                Movies.Add(new Movie() { Title = "Rambo I", Rating = review.Average(x => x.Key), Actor = "Stallone", Money = 1000, Review = review });
+
+            }
+            catch (Exception)
+            {
+
+                Console.WriteLine("Value out of bounds");
+            }
+
             var review0 = new Dictionary<int, string>() { { 10, "Perfect" }, { 8, "Very Good" } };
             var review1 = new Dictionary<int, string>() { { 10, "Perfect" }, { 6, "Good" }, { 8, "Very Good" }, { 9, "Very Good" } };
             var review2 = new Dictionary<int, string>() { { 10, "Perfect" }, { 5, "Good" }, { 7, "Very Good" }, { 8, "Very Good" } };
@@ -28,8 +48,7 @@ namespace MovieAssignment
             var review10 = new Dictionary<int, string>() { { 8, "Very Good" }, { 6, "Good" } };
             var review11 = new Dictionary<int, string>() { { 5, "Good" }, { 6, "Good" }, { 9, "Very Good" } };
 
-
-            Movies.Add(new Movie() { Title = "Rambo I", Rating = review.Average(x => x.Key), Actor = "Stallone", Money = 1000, Review = review });
+         
             Movies.Add(new Movie() { Title = "Rambo II", Rating = review1.Average(x => x.Key), Actor = "Stallone", Money = 1000, Review = review1 });
             Movies.Add(new Movie() { Title = "Rambo III", Rating = review2.Average(x => x.Key), Actor = "Stallone", Money = 1000, Review = review2 });
             Movies.Add(new Movie() { Title = "Rambo IV", Rating = review3.Average(x => x.Key), Actor = "Stallone", Money = 1000, Review = review3 });
